@@ -1,9 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace i.ua.DOM.Framework
 {
@@ -15,12 +10,12 @@ namespace i.ua.DOM.Framework
             this.driver = driver;
         }
 
-        public void driverLaunch(string url)
+        public void DriverLaunch(string url)
         { 
             driver.Url = url;
             driver.Manage().Window.Maximize();
         }
-        public void driverStop(IWebDriver driver)
+        public void DriverStop(IWebDriver driver)
         {
             driver.Close();
         }

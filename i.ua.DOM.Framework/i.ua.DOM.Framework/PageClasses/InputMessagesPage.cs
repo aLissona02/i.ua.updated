@@ -1,10 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace i.ua.DOM.Framework.TestCases
 {
@@ -12,21 +6,23 @@ namespace i.ua.DOM.Framework.TestCases
     {
         protected IWebDriver driver;
 
+        private IWebElement createButton => driver.FindElement(By.ClassName("Left"));
+        private IWebElement draftsButton => driver.FindElement(By.XPath("//a[text()=' Чернетки']"));
+
         public InputMessagesPage(IWebDriver driver)
 
         {
             this.driver = driver;
         }
-        public void createMes()
+
+        public void CreateMessage()
         {
-            IWebElement createBut = driver.FindElement(By.ClassName("Left"));
-            createBut.Click();
+            createButton.Click();
         }
 
-        public void draftsButton()
+        public void ClickOnDraftsButton()
         {
-            IWebElement draftsBut = driver.FindElement(By.XPath("//a[text()=' Чернетки']"));
-            draftsBut.Click();
+            draftsButton.Click();
         }
     }
 }

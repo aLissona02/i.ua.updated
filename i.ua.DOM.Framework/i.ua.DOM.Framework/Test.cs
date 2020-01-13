@@ -1,5 +1,4 @@
 ﻿using System.Configuration;
-using System.Collections.Specialized;
 using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
@@ -7,8 +6,8 @@ using i.ua.DOM.Framework.TestCases;
 
 namespace i.ua.DOM.Framework
 {
-  
-    public class Test
+
+    public class TestExecution
         
     {
        IWebDriver driver = new ChromeDriver();
@@ -16,7 +15,7 @@ namespace i.ua.DOM.Framework
         public void Initialize()
         {
             DriverOperations webDriver = new DriverOperations(driver);
-            webDriver.driverLaunch("https://www.i.ua/");
+            webDriver.DriverLaunch("https://www.i.ua/");
         }
 
         [Test]
@@ -24,43 +23,43 @@ namespace i.ua.DOM.Framework
         public void testPerform()
         {
             string login = ConfigurationManager.AppSettings.Get("login");
-            LoginPage logPageOp = new LoginPage(driver);
-            logPageOp.sendLogin(login);
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.EnterLogin(login);
             string password = ConfigurationManager.AppSettings.Get("pass");
-            logPageOp.sendPassword(password);
+            loginPage.EnterPassword(password);
 
-            InputMessagesPage inputPage = new InputMessagesPage(driver);
-            inputPage.createMes();
+            InputMessagesPage inputMessagesPage = new InputMessagesPage(driver);
+            inputMessagesPage.CreateMessage();
 
-            MessagePage message = new MessagePage(driver);
+            MessagePage messagePage = new MessagePage(driver);
             string textTo = ConfigurationManager.AppSettings["textTo"];
-            message.fieldToFill(textTo);
+            messagePage.FillFieldTo(textTo);
             string textMess = ConfigurationManager.AppSettings["textMessage"];
-            message.fieldTextFill(textMess);
-            message.saveMes();
-            inputPage.draftsButton();
+            messagePage.FillFieldText(textMess);
+            messagePage.SaveMessage();
+            inputMessagesPage.ClickOnDraftsButton();
 
-            DraftsPage drafts = new DraftsPage(driver);
-            drafts.clickOnLastMessage();
-            string toEdited = ConfigurationManager.AppSettings["textToEdited"];
-            message.fieldToEdit(toEdited);
-            string subjEdited = ConfigurationManager.AppSettings["textSubjectEdited"];
-            message.fieldSubjEdit(subjEdited);
-            string textEdited = ConfigurationManager.AppSettings["textMessageEdited"];
-            message.fieldTextEdit(textEdited);
-            message.saveMes();
+            DraftsPage draftsPage = new DraftsPage(driver);
+            draftsPage.ClickOnLastMessage();
+            string editedFieldTo = ConfigurationManager.AppSettings["textToEdited"];
+            messagePage.EditFieldTo(editedFieldTo);
+            string editedFieldSubject = ConfigurationManager.AppSettings["textSubjectEdited"];
+            messagePage.EditFieldSubject(editedFieldSubject);
+            string editedFieldText = ConfigurationManager.AppSettings["textMessageEdited"];
+            messagePage.EditFieldText(editedFieldText);
+            messagePage.SaveMessage();
 
-            inputPage.draftsButton();
-            drafts.clickOnLastMessage();
+            inputMessagesPage.ClickOnDraftsButton();
+            draftsPage.ClickOnLastMessage();
 
-            string toActual = message.currentValueId("to");
-            Assert.AreEqual(toEdited, toActual);
+            string actualFieldTo = messagePage.GetCurrentValueId("to");
+            Assert.AreEqual(editedFieldTo, actualFieldTo);
 
-            string subjActual = message.currentValueName("subject");
-            Assert.AreEqual(subjEdited, subjActual);
+            string actualFieldSubject = messagePage.GetCurrentValueName("subject");
+            Assert.AreEqual(editedFieldSubject, actualFieldSubject);
 
-            string textActual = message.currentValueId("text");
-            Assert.AreEqual(textEdited, textActual);
+            string actualFieldText = messagePage.GetCurrentValueId("text");
+            Assert.AreEqual(editedFieldText, actualFieldText);
 
         }
 
@@ -69,7 +68,7 @@ namespace i.ua.DOM.Framework
         public void CleanUp()
         {
             DriverOperations webDriver = new DriverOperations(driver);
-            webDriver.driverStop(driver);
+            webDriver.DriverStop(driver);
         }
     }
 }

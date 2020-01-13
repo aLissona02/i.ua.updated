@@ -1,9 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace i.ua.DOM.Framework.TestCases
 {
@@ -11,58 +6,56 @@ namespace i.ua.DOM.Framework.TestCases
     {
         protected IWebDriver driver;
 
+       private IWebElement fieldTo => driver.FindElement(By.XPath("//textarea[@id='to']"));
+        private IWebElement fieldText => driver.FindElement(By.XPath("//textarea[@id='text']"));
+        private IWebElement fieldSubject => driver.FindElement(By.XPath("//div[@class='field_value']//span[@class= 'field']//input[@name='subject']"));
+        private IWebElement saveButton => driver.FindElement(By.Name("save_in_drafts"));
+
         public MessagePage(IWebDriver driver)
         {
             this.driver = driver;
         }
-        public void fieldToFill(string textTo)
+        public void FillFieldTo(string textTo)
         {
-            IWebElement fieldTo = driver.FindElement(By.XPath("//textarea[@id='to']"));
             fieldTo.SendKeys(textTo);
         }
-        public void fieldToEdit(string textToEdited)
+        public void EditFieldTo(string textToEdited)
         {
-            IWebElement fieldTo = driver.FindElement(By.XPath("//textarea[@id='to']"));
             fieldTo.Clear();
             fieldTo.SendKeys(textToEdited);
         }
 
-        public void fieldTextFill(string textText)
+        public void FillFieldText(string textMessage)
         {
-            IWebElement fieldText = driver.FindElement(By.XPath("//textarea[@id='text']"));
-            fieldText.SendKeys(textText);
+            fieldText.SendKeys(textMessage);
         }
-        public void fieldTextEdit(string textTextEdited)
+        public void EditFieldText(string textMessageEdited)
         {
-            IWebElement fieldText = driver.FindElement(By.XPath("//textarea[@id='text']"));
             fieldText.Clear();
-            fieldText.SendKeys(textTextEdited);
+            fieldText.SendKeys(textMessageEdited);
         }
 
-        public void fieldSubjectFill(string textSubj)
+        public void FillFieldSubject(string textSubject)
         {
-            IWebElement fieldSubj = driver.FindElement(By.XPath("//div[@class='field_value']//span[@class= 'field']//input[@name='subject']"));
-            fieldSubj.SendKeys(textSubj);
+            fieldSubject.SendKeys(textSubject);
         }
-        public void fieldSubjEdit(string textSubjEdited)
+        public void EditFieldSubject(string textSubjectEdited)
         {
-            IWebElement fieldSubj = driver.FindElement(By.XPath("//div[@class='field_value']//span[@class= 'field']//input[@name='subject']"));
-            fieldSubj.Clear();
-            fieldSubj.SendKeys(textSubjEdited);
+            fieldSubject.Clear();
+            fieldSubject.SendKeys(textSubjectEdited);
         }
 
-        public void saveMes()
+        public void SaveMessage()
         {
-            IWebElement saveBut = driver.FindElement(By.Name("save_in_drafts"));
-            saveBut.Click();
+            saveButton.Click();
         }
         
-        public string currentValueId(string path)
+        public string GetCurrentValueId(string path)
         {
            string value =  driver.FindElement(By.Id(path)).GetAttribute("innerHTML");
             return value;
         }
-        public string currentValueName(string path)
+        public string GetCurrentValueName(string path)
         {
             string value = driver.FindElement(By.Name(path)).GetAttribute("value");
             return value;
