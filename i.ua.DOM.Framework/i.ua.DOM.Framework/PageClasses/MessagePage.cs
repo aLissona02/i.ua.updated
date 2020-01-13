@@ -6,7 +6,7 @@ namespace i.ua.DOM.Framework.TestCases
     {
         protected IWebDriver driver;
 
-       private IWebElement fieldTo => driver.FindElement(By.XPath("//textarea[@id='to']"));
+        private IWebElement fieldTo => driver.FindElement(By.XPath("//textarea[@id='to']"));
         private IWebElement fieldText => driver.FindElement(By.XPath("//textarea[@id='text']"));
         private IWebElement fieldSubject => driver.FindElement(By.XPath("//div[@class='field_value']//span[@class= 'field']//input[@name='subject']"));
         private IWebElement saveButton => driver.FindElement(By.Name("save_in_drafts"));
@@ -15,6 +15,7 @@ namespace i.ua.DOM.Framework.TestCases
         {
             this.driver = driver;
         }
+
         public void FillFieldTo(string textTo)
         {
             fieldTo.SendKeys(textTo);

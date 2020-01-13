@@ -4,7 +4,7 @@ namespace i.ua.DOM.Framework.TestCases
 {
     class LoginPage
     {
-         protected IWebDriver driver;
+        protected IWebDriver driver;
 
         private IWebElement loginElement => driver.FindElement(By.Name("login"));
         private IWebElement passwordElement => driver.FindElement(By.Name("pass"));

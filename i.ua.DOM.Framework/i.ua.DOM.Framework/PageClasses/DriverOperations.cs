@@ -5,6 +5,7 @@ namespace i.ua.DOM.Framework
     class DriverOperations
     {
         private IWebDriver driver;
+
         public DriverOperations(IWebDriver driver)
         {
             this.driver = driver;
@@ -15,6 +16,7 @@ namespace i.ua.DOM.Framework
             driver.Url = url;
             driver.Manage().Window.Maximize();
         }
+
         public void DriverStop(IWebDriver driver)
         {
             driver.Close();
