@@ -19,7 +19,7 @@ namespace i.ua.DOM.Framework
         }
 
         [Test]
-        public void testPerform()
+        public void TestPerform()
         {
             var login = ConfigurationManager.AppSettings.Get("login");
             var password = ConfigurationManager.AppSettings.Get("pass");
