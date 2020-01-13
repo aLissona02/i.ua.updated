@@ -6,8 +6,8 @@ namespace i.ua.DOM.Framework.TestCases
     {
          protected IWebDriver driver;
 
-        private IWebElement loginEl => driver.FindElement(By.Name("login"));
-        private IWebElement passwordEl => driver.FindElement(By.Name("pass"));
+        private IWebElement loginElement => driver.FindElement(By.Name("login"));
+        private IWebElement passwordElement => driver.FindElement(By.Name("pass"));
 
         public LoginPage(IWebDriver driver)
 
@@ -15,16 +15,16 @@ namespace i.ua.DOM.Framework.TestCases
             this.driver = driver;
         }
 
-        public void EnterLogin(string log)
+        public void EnterLogin(string login)
         {
-            loginEl.Click();
-            loginEl.SendKeys(log); 
+            loginElement.Click();
+            loginElement.SendKeys(login); 
         }
 
-        public void EnterPassword(string pass)
+        public void EnterPassword(string password)
         {
-            passwordEl.Click();
-            passwordEl.SendKeys(pass + Keys.Enter);
+            passwordElement.Click();
+            passwordElement.SendKeys(password + Keys.Enter);
         }
 
     }
